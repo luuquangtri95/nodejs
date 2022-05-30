@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-6">
+    <div class="user-info-form">
+      <div class="mb-3">
+        <h2>Edit user</h2>
+      </div>
+      <form method="POST" action="/user/update-user">
+        <input hidden value="<%= data.id %>" name="id" />
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            value="<%= data.email %>"
+            class="form-control"
+            id="user"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="user" class="form-label">Username</label>
+          <input
+            type="text"
+            name="username"
+            value="<%= data.username %>"
+            class="form-control"
+            id="user"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+</div>

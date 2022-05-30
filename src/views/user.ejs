@@ -4,7 +4,7 @@
       <div class="mb-3">
         <h2>Create new user</h2>
       </div>
-      <form method="POST" action="/user/create-user">
+      <form method="POST" action="/user">
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
           <input type="email" name="email" class="form-control" id="user" />
@@ -50,14 +50,22 @@
         <td><%= item.email %></td>
         <td><%= item.username %></td>
         <td>
-          <button type="button" class="btn btn-warning">Edit</button>
-          <form
+          <a
+            type="button"
             style="display: inline"
-            method="POST"
-            action="/delete-user/<%= item.id %>"
+            class="btn btn-warning"
+            href="/update-user/<%= item.id %>"
           >
-            <button type="submit" class="btn btn-danger">Danger</button>
-          </form>
+            Edit
+          </a>
+          <a
+            type="button"
+            style="display: inline"
+            href="/delete-user/<%= item.id %>"
+            class="btn btn-danger"
+          >
+            Delete
+          </a>
         </td>
       </tr>
       <% }) %>
