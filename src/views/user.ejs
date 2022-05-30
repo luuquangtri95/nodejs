@@ -1,25 +1,66 @@
-<div class="user-info-form">
-  <form method="POST" action="/user/create-user">
-    <div class="mb-3">
-      <label for="email" class="form-label">email</label>
-      <input type="email" name="email" class="form-control" id="user" />
-    </div>
+<div class="row">
+  <div class="col-6">
+    <div class="user-info-form">
+      <div class="mb-3">
+        <h2>Create new user</h2>
+      </div>
+      <form method="POST" action="/user/create-user">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" id="user" />
+        </div>
 
-    <div class="mb-3">
-      <label for="user" class="form-label">Username</label>
-      <input type="text" name="username" class="form-control" id="user" />
-    </div>
+        <div class="mb-3">
+          <label for="user" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" id="user" />
+        </div>
 
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        name="password"
-        class="form-control"
-        id="password"
-      />
-    </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            id="password"
+          />
+        </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="table-user mt-3">
+  <h3>Table users</h3>
+  <hr />
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Email</th>
+        <th scope="col">UserName</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach((item,index) => { %>
+      <tr>
+        <th scope="row"><%= index+1 %></th>
+        <td><%= item.email %></td>
+        <td><%= item.username %></td>
+        <td>
+          <button type="button" class="btn btn-warning">Edit</button>
+          <form
+            style="display: inline"
+            method="POST"
+            action="/delete-user/<%= item.id %>"
+          >
+            <button type="submit" class="btn btn-danger">Danger</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </div>

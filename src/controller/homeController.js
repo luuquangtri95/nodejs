@@ -1,11 +1,4 @@
-import mysql from "mysql2";
-
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "jwt",
-});
+import userService from "../service/userService";
 
 const handleHelloWorld = (req, res) => {
   // model=> get from database
@@ -17,37 +10,48 @@ const handleHelloWorld = (req, res) => {
   return res.render("home.ejs", body);
 };
 
-const handleUserPage = (req, res) => {
+const handleUserPage = async (req, res) => {
   // model=> get from database
+
+  const userList = await userService.getListUsers();
+
   const body = {
     title: "user page",
+    data: userList,
   };
 
   return res.render("user.ejs", body);
 };
 
 const handleCreateNewUser = (req, res) => {
-  let email = req.body.email;
-  let password = req.body.password;
-  let username = req.body.username;
+  const data = {
+    email: req.body.email,
+    password: req.body.password,
+    username: req.body.username,
+  };
 
-  if (!username || !password) return;
+  if (!data.username || !data.password) return;
 
-  //
+  /**
+   *  todo: if has username and password then save data to database
+   */
 
-  connection.query(
-    `INSERT INTO users (email,password,username) VALUES (?,?,?)`,
-    [email, password, username],
-    (err, results, fields) => {
-      console.log(results);
-    }
-  );
+  userService.createNewUser(data);
 
-  res.send("handleCreateNewUser");
+  return res.redirect("/user");
+};
+
+const handleDeleteUser = async (req, res) => {
+  const id = req.params.id; // id nhận từ /user/:id
+
+  await userService.deleteUser(id);
+
+  return res.redirect("/user");
 };
 
 module.exports = {
   handleHelloWorld,
   handleUserPage,
   handleCreateNewUser,
+  handleDeleteUser,
 };
