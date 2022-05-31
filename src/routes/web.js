@@ -13,8 +13,8 @@ const initWebRoutes = (app) => {
     return res.render("home.ejs");
   });
 
-  router.get("/user", userController.getAllUser);
-  router.post("/user", userController.createNewUser);
+  router.get("/user", userController.handleGetAllUser);
+  router.post("/user", userController.handleCreateNewUser);
 
   return app.use("/", router);
 };

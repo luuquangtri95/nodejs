@@ -10,11 +10,13 @@
   "author": "luu quang tri",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "3.7.2",
     "body-parser": "1.19.1",
     "dotenv": "10.0.0",
     "ejs": "3.1.6",
     "express": "4.17.2",
-    "express-ejs-layouts": "2.5.1"
+    "express-ejs-layouts": "2.5.1",
+    "mysql2": "2.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.15.4",
