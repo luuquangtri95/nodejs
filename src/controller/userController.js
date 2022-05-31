@@ -25,17 +25,37 @@ const userController = {
   },
 
   handleDeleteUser(req, res) {
+    const id = req.params.id;
+
+    console.log(id);
+
     // model => delete data to database use "id"
+    userService.deleteUser(id);
 
     // ! controller Interactive with view
     return res.redirect("/user");
   },
 
-  handleUpdateUser(req, res) {
+  async handleUpdateUser(req, res) {
+    const id = req.params.id;
     // model => update data to database use "id"
+    // userService.updateUser(id);
+    const user = await userService.getUserById(id);
+
+    if (user.length === 0) return;
+
+    const dataUser = { ...user[0] };
 
     // ! controller Interactive with view
-    return res.send("create success");
+    return res.render("user-update.ejs", { dataUser });
+  },
+
+  handleUserUpdated(req, res) {
+    const data = req.body;
+
+    userService.updateUser(data);
+
+    return res.redirect("/user");
   },
 };
 

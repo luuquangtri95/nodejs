@@ -1,0 +1,29 @@
+<div class="form-container mt-3">
+  <h1>Edit user</h1>
+  <form method="POST" action="/user/update">
+    <input hidden name="id" value="<%= dataUser.id %>" />
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        name="email"
+        value="<%= dataUser.email %>"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">User name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        id="username"
+        value="<%= dataUser.username %>"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>

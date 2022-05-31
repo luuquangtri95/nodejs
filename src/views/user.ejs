@@ -48,12 +48,20 @@
     <tbody>
       <% userList.forEach((user,index) => { %>
       <tr>
-        <th scope="row"><%- index + 1 %></th>
-        <td><%- user.email %></td>
-        <td><%- user.username %></td>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= user.email %></td>
+        <td><%= user.username %></td>
         <td>
-          <a type="button" class="btn btn-info" href="<%- user.id %>">Edit</a>
-          <a type="button" class="btn btn-danger" href="<%- user.id %>"
+          <a
+            type="button"
+            class="btn btn-info"
+            href="/user/update/<%= user.id %>"
+            >Edit</a
+          >
+          <a
+            type="button"
+            class="btn btn-danger"
+            href="/user/delete/<%= user.id %>"
             >Delete</a
           >
         </td>
