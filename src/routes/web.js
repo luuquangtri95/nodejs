@@ -1,4 +1,5 @@
 import express from "express";
+import userController from "../controller/userController";
 
 const router = express.Router();
 
@@ -12,9 +13,8 @@ const initWebRoutes = (app) => {
     return res.render("home.ejs");
   });
 
-  router.get("/user", (req, res) => {
-    return res.render("user.ejs");
-  });
+  router.get("/user", userController.getAllUser);
+  router.post("/user", userController.createNewUser);
 
   return app.use("/", router);
 };
