@@ -9,15 +9,11 @@ const router = express.Router();
 
 const initWebRoutes = (app) => {
   router.get("/", (req, res) => {
-    return res.send(`
-    <h1>Hello World</h1>
-    `);
+    return res.render("home.ejs");
   });
 
-  router.get("/search", (req, res) => {
-    return res.send(`
-    <h1>Search page</h1>
-    `);
+  router.get("/user", (req, res) => {
+    return res.render("user.ejs");
   });
 
   return app.use("/", router);
