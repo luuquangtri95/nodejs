@@ -24,16 +24,29 @@ const userController = {
 
   deleteUser(req, res) {
     // model => delete data to database use "id"
+    const id = req.params.id;
+
+    userService.deleteUser(id);
 
     // ! controller Interactive with view
-    return res.render("/user.ejs");
+    return res.redirect("/user");
+  },
+
+  async getUserById(req, res) {
+    const id = req.params.id;
+
+    const user = await userService.getById(id);
+
+    return res.render("user-update.ejs", { user });
   },
 
   updateUser(req, res) {
     // model => update data to database use "id"
 
+    userService.updateUser(req.body);
+
     // ! controller Interactive with view
-    return res.render("/user.ejs");
+    return res.redirect("/user");
   },
 };
 
