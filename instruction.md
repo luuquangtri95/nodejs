@@ -2,6 +2,8 @@
 
 https://sequelize.org/docs/v6/other-topics/migrations/
 
+=> auto generate db: npx sequelize-cli db:migrate
+
 ### start project
 
 - npm install
