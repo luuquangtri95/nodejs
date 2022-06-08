@@ -2,6 +2,29 @@ import db from "../models/index";
 
 const userService = {
   async getListUser() {
+    // test relationship
+
+    const newUser = await db.User.findOne({
+      where: { id: 1 },
+      attributes: ["username", "email", "groupId"],
+      include: { model: db.Group, attributes: ["name", "description"] },
+      raw: true,
+      nest: true,
+    });
+
+    let roles = await db.Role.findAll({
+      attributes: ["id", "url", "description"],
+      include: {
+        model: db.Group,
+        where: { id: 2 },
+        attributes: ["name", "description"],
+      },
+      raw: true,
+      nest: true,
+    });
+
+    console.log("roles", roles);
+
     let userList = [];
     try {
       userList = await db.User.findAll();

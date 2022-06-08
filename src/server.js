@@ -8,6 +8,16 @@ import initWebRoutes from "./routes/web";
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", process.env.REACT_URL);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
+});
+
 // config body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
