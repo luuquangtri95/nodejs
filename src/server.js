@@ -4,19 +4,14 @@ import express from "express";
 require("dotenv").config();
 import configViewEngine from "./config/viewEngine";
 import initWebRoutes from "./routes/web";
+import initApiRoutes from "./routes/api";
+import corsConfig from "./config/cors";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", process.env.REACT_URL);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
+// cors config
+corsConfig(app);
 
 // config body parser
 app.use(bodyParser.json());
@@ -30,6 +25,7 @@ configViewEngine(app);
 
 // init web routes
 initWebRoutes(app);
+initApiRoutes(app);
 
 app.listen(PORT, () => {
   console.log(`port listening ${PORT}`);
