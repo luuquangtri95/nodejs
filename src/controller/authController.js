@@ -39,7 +39,8 @@ const authController = {
   async handleLogin(req, res) {
     try {
       const data = req.body;
-      if (!data.email || !data.password) {
+
+      if (!data.valueLogin || !data.password) {
         return res.status(200).json({
           EM: "Missing required parameters", // error massage
           EC: "1", // error code
@@ -53,13 +54,12 @@ const authController = {
       return res.status(200).json({
         EM: result.EM, // error massage
         EC: result.EC, // error code
-        DT: "", // data
+        DT: result.DT, // data
       });
     } catch (error) {
       return res.status(500).json({
         EM: "error form server", // error massage
         EC: "-1", // error code
-        DT: "", // data
       });
     }
   },

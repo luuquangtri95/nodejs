@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import db from "../models/index";
 
 const authService = {
@@ -37,25 +38,28 @@ const authService = {
     }
   },
 
-  async loginUser({ email, password }) {
+  async loginUser({ valueLogin, password }) {
     try {
-      const isCheckLoginUser = await db.User.findOne({
+      const user = await db.User.findOne({
         where: {
-          email,
+          [Op.or]: [{ email: valueLogin }, { phone: valueLogin }],
           password,
         },
+        raw: true,
       });
 
-      if (isCheckLoginUser === null) {
+      if (user === null) {
         return {
-          EM: "Incorrect email or password ",
+          EM: "Incorrect email/phone or password ",
           EC: 1,
+          DT: "",
         };
       }
 
       return {
         EM: "login user successfully",
         EC: 0,
+        DT: user,
       };
     } catch (error) {
       return {
